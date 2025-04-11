@@ -1,0 +1,10 @@
+# Add Python dependencies here as the project evolves
+
+## ingestion
+#requests
+#boto3
+
+## analysis
+#pandas
+#ta
+#scikit-learn
