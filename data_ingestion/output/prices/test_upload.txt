@@ -1,0 +1,1 @@
+This is a test upload to AWS S3 from my Python script.

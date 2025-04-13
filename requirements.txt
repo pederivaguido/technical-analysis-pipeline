@@ -1,8 +1,9 @@
 # Add Python dependencies here as the project evolves
 
 ## ingestion
-#requests
-#boto3
+yfinance
+boto3
+pandas
 
 ## analysis
 #pandas
