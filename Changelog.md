@@ -14,8 +14,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - LICENSE added (CC BY-NC-ND 4.0)
 - Changelog markdown created
 
-## [0.1.1] - 2025-04-12 (Planned)
+## [0.2.0] - 2025-04-13 
 ### Added
-- Create `ingestion` branch for development
-- Implement Python script to fetch stock data from public API
-- Connect and test AWS S3 integration for raw data storage
+- `fetch_from_api.py` to ingest historical and daily price data and fundamentals
+- Fundamentals versioning using daily snapshots with change detection
+- `upload_to_s3.py` for structured S3 syncing with SHA-256 hash tracking
+- Logging of uploaded files to `upload_log.txt`
+- Folder structure under `/prices/` and `/fundamentals/`
+
+### Improved
+- Replaced redundant `.json` export logic with `.csv` append + dedup
+- Switched from filename-based sync to content-aware upload mechanism
+
+### Notes
+- All upload logic uses least-privilege IAM user and profile-based auth
