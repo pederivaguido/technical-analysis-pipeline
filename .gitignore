@@ -1,0 +1,40 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.so
+
+# Distribution / packaging
+*.egg-info/
+build/
+dist/
+
+# Virtual environment
+venv/
+env/
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# VS Code settings
+.vscode/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Logs and outputs
+*.log
+upload_log.txt
+
+# Environment and credentials
+*.env
+*.pem
+secrets.json
+
+# Data outputs (ignore contents, keep folder)
+data_ingestion/output/*
+!data_ingestion/output/.gitkeep
+
+
