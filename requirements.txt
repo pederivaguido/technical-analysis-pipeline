@@ -5,6 +5,9 @@ yfinance
 boto3
 pandas
 
+##Scheduling
+apache-airflow==2.9.1
+
 ## analysis
 #pandas
 #ta

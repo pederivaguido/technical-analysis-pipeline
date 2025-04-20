@@ -28,3 +28,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ### Notes
 - All upload logic uses least-privilege IAM user and profile-based auth
+
+## [0.3.0] - 2025-04-20
+### Added
+- Created a new scheduler branch
+- Installed and configured Apache airflow
+- Created a DAG to run 'fetch_from_api.py' and 'upload_to_s3.py' daily
