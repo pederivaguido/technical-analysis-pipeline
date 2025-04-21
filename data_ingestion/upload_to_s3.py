@@ -8,12 +8,17 @@ from datetime import datetime
 # AWS and S3 configuration
 BUCKET_NAME = 'technical-analysis-data' 
 PROFILE_NAME = 'data-pipeline'
-PRICE_DIR = Path('data_ingestion/output/prices')
-FUND_DIR = Path('data_ingestion/output/fundamentals')
-LOG_FILE = Path('data_ingestion/output/upload_log.txt')
+BASE_DIR = Path(__file__).resolve().parent          # /opt/airflow/data_ingestion
+PRICE_DIR = BASE_DIR / "output" / "prices"
+FUND_DIR  = BASE_DIR / "output" / "fundamentals"
+LOG_FILE  = BASE_DIR / "output" / "upload_log.txt"
 
 # Setup session using AWS CLI profile
-session = boto3.Session(profile_name=PROFILE_NAME)
+session = boto3.Session(
+    aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+    region_name=os.getenv("AWS_DEFAULT_REGION", "us-east-1")
+)
 s3 = session.client('s3')
 
 def compute_hash(file_path):
