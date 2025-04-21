@@ -34,3 +34,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - Created a new scheduler branch
 - Installed and configured Apache airflow
 - Created a DAG to run 'fetch_from_api.py' and 'upload_to_s3.py' daily
+
+## [0.3.1] - 2025-04-21
+### Added
+- Setup Docker 
+- Created a DAG to run 'fetch_from_api.py' and 'upload_to_s3.py' daily
+- [ToDo] figure out why the .csv files are not overwritten and uploaded to S3

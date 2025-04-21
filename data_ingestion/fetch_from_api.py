@@ -7,8 +7,9 @@ from pathlib import Path
 
 # ========== SETTINGS ==========
 TICKERS = ["SQ", "PYPL", "FISV", "ADYEN.AS", "MELI", "NU", "SOFI", "UPST", "V", "MA"]
-PRICE_DIR = Path("data_ingestion/output/prices")
-FUND_DIR = Path("data_ingestion/output/fundamentals")
+BASE_DIR = Path(__file__).resolve().parent          # /opt/airflow/data_ingestion
+PRICE_DIR = BASE_DIR / "output" / "prices"
+FUND_DIR  = BASE_DIR / "output" / "fundamentals"
 TODAY = datetime.now().strftime("%Y-%m-%d")
 
 # Ensure output directories exist
@@ -28,14 +29,13 @@ def fetch_and_append_price(symbol):
 
         csv_path = PRICE_DIR / f"{symbol}.csv"
 
+        print(f"📅 hist dates for {symbol}:\n{hist['Date'].tail(5)}")
         if csv_path.exists():
             existing = pd.read_csv(csv_path)
-
-            # ✅ Ensure both Date columns are strings
-            hist["Date"] = hist["Date"].astype(str)
-            existing["Date"] = existing["Date"].astype(str)
-
+            print(f"📅 existing dates for {symbol}:\n{existing['Date'].tail(5)}")
+            print(f"📊 Rows in hist: {len(hist)} | Rows in existing: {len(existing)}")
             new_rows = hist[~hist["Date"].isin(existing["Date"])]
+            print(f"🆕 New rows found for {symbol}: {len(new_rows)}")
             if not new_rows.empty:
                 updated = pd.concat([existing, new_rows]).sort_values("Date")
                 updated.to_csv(csv_path, index=False)
