@@ -37,4 +37,7 @@ secrets.json
 data_ingestion/output/*
 !data_ingestion/output/.gitkeep
 
+# Airflow & Docker logs
+logs/
+airflow_docker/logs/
 

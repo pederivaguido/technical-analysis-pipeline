@@ -13,7 +13,11 @@ FUND_DIR = Path('data_ingestion/output/fundamentals')
 LOG_FILE = Path('data_ingestion/output/upload_log.txt')
 
 # Setup session using AWS CLI profile
-session = boto3.Session(profile_name=PROFILE_NAME)
+session = boto3.Session(
+    aws_access_key_id=os.getenv("AWS_ACCESS_KEY_ID"),
+    aws_secret_access_key=os.getenv("AWS_SECRET_ACCESS_KEY"),
+    region_name=os.getenv("AWS_DEFAULT_REGION", "us-east-1")
+)
 s3 = session.client('s3')
 
 def compute_hash(file_path):

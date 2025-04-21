@@ -18,7 +18,7 @@ FUND_DIR.mkdir(parents=True, exist_ok=True)
 def fetch_and_append_price(symbol):
     try:
         ticker = yf.Ticker(symbol)
-        hist = ticker.history(period="5d")  # Buffer of 5 days in case of holidays, weekends, API flakiness, etc.
+        hist = ticker.history(period="10d")  # Buffer of 5 days in case of holidays, weekends, API flakiness, etc.
         if hist.empty:
             print(f"⚠️ No data for {symbol}")
             return
@@ -30,6 +30,11 @@ def fetch_and_append_price(symbol):
 
         if csv_path.exists():
             existing = pd.read_csv(csv_path)
+
+            # ✅ Ensure both Date columns are strings
+            hist["Date"] = hist["Date"].astype(str)
+            existing["Date"] = existing["Date"].astype(str)
+
             new_rows = hist[~hist["Date"].isin(existing["Date"])]
             if not new_rows.empty:
                 updated = pd.concat([existing, new_rows]).sort_values("Date")
